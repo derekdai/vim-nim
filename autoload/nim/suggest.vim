@@ -22,7 +22,7 @@ endfunction
 
 function! s:NimSuggest.on_exit()
     echo ""
-    let self.lines = util#FilterCompletions(self.lines)
+    let self.lines = nim#util#FilterCompletions(self.lines)
     if len(self.lines) > 0
         call self.handler.run(self)
     else
@@ -58,7 +58,7 @@ function! nim#suggest#NewKnown(command, sync, useV2, file, line, col, handler)
             echohl Comment | echo "Got nothing" | echohl Normal
         endif
     else
-        call util#StartQuery()
+        call nim#util#StartQuery()
         let result.job = nim#suggest#CreateJob(a:useV2, result.file, result)
         if result.job > 0
             call jobsend(result.job, query . "\nquit\n")
