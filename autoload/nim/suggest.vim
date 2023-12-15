@@ -48,7 +48,7 @@ function! nim#suggest#NewKnown(command, sync, useV2, file, line, col, handler)
     let result.tempfile = nim#util#WriteMemfile()
     let query = a:command . " " . result.file . ";" . result.tempfile . ":" . result.line . ":" . result.col
 
-    if !result.isAsync
+    if 1
         let jobcmdstr = g:nvim_nim_exec_nimsuggest . " " . (a:useV2 ? '--v2' : '') . " " . '--stdin' . " " . result.file
         let fullcmd = 'echo -e "' . query . '"|' . jobcmdstr
         let result.lines = nim#util#FilterCompletions(split(system(fullcmd), "\n"))
